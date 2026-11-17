@@ -1,0 +1,278 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Hiragino Maru Gothic ProN', 'Rounded Mplus 1c', 'Yu Gothic',
+    sans-serif;
+  color: #1e3a5f;
+  overflow-x: hidden;
+}
+
+/* ブルーの水玉模様（ポルカドット）背景 */
+.app-container {
+  min-height: 100dvh;
+  width: 100%;
+  background-color: #38bdf8;
+  background-image: radial-gradient(#e0f2fe 18%, transparent 19%),
+    radial-gradient(#ffffff 18%, transparent 19%);
+  background-size: 60px 60px;
+  background-position: 0 0, 30px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px;
+}
+
+/* メインカード：スマホでキーボードが出ても隠れないよう上寄せ配置 */
+.game-card {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
+  padding: 24px 20px;
+  margin-top: 8px;
+  box-shadow: 0 12px 28px rgba(3, 105, 161, 0.25);
+  border: 4px solid #ffffff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 正解時のポップなアニメーション */
+.game-card.flash-success {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 6px #fde047, 0 12px 28px rgba(3, 105, 161, 0.3);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* スタート画面 */
+.badge {
+  background: #e0f2fe;
+  color: #0284c7;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #0369a1;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 0px #bae6fd;
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #334155;
+  margin-bottom: 24px;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #0369a1;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.primary-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #0369a1;
+}
+
+/* プレイ画面 */
+.status-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stat-box {
+  flex: 1;
+  background: #f0f9ff;
+  border: 2px solid #bae6fd;
+  border-radius: 16px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-box.urgent {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+  animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.03);
+  }
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #64748b;
+}
+
+.stat-box.urgent .stat-label {
+  color: #ef4444;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.stat-value small {
+  font-size: 0.9rem;
+  margin-left: 2px;
+}
+
+/* 問題表示エリア */
+.question-area {
+  width: 100%;
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 18px 12px;
+  margin-bottom: 16px;
+  border: 2px dashed #7dd3fc;
+}
+
+.reading-text {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #0284c7;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.display-text {
+  font-size: clamp(1.5rem, 6vw, 2.1rem);
+  font-weight: 900;
+  color: #0f172a;
+  word-break: keep-all;
+}
+
+/* 入力フォーム（16px以上でiOSの自動ズームを防止） */
+.input-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flick-input {
+  width: 100%;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px 16px;
+  border: 3px solid #38bdf8;
+  border-radius: 14px;
+  outline: none;
+  background: #ffffff;
+  color: #0f172a;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.flick-input:focus {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.25);
+}
+
+.skip-btn {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.skip-btn:hover {
+  color: #0284c7;
+}
+
+/* リザルト画面 */
+.result-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #0369a1;
+  margin-bottom: 16px;
+}
+
+.result-score-box {
+  width: 100%;
+  background: #f0f9ff;
+  border: 3px solid #7dd3fc;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.result-label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #0284c7;
+}
+
+.result-score {
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: #0369a1;
+  line-height: 1.1;
+  margin: 8px 0;
+}
+
+.result-score span {
+  font-size: 1.3rem;
+  margin-left: 4px;
+}
+
+.result-sub {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #475569;
+}
+
+/* タブレット・PC向けの調整 */
+@media (min-width: 600px) {
+  .app-container {
+    align-items: center;
+    padding: 32px;
+  }
+
+  .game-card {
+    padding: 36px 32px;
+    margin-top: 0;
+  }
+}
